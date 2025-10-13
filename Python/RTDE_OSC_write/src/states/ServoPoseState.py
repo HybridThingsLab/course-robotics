@@ -56,8 +56,7 @@ class ServoPoseState(RobotState):
         # convert pose to joint q
         pose_joint_q = self.rtde_c.getInverseKinematics(self.robotPose)      
         
-        # check whether joints are within safety limits
-         # check whether pose is wihtin safety limits
+        # check whether pose is wihtin safety limits
         if (not self.rtde_c.isJointsWithinSafetyLimits(pose_joint_q)):
             self.feedback.send(FeedbackMessage.JOINTSAFETYVIOLATION)
             return

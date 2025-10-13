@@ -35,7 +35,7 @@ class RobotController(Thread):
 
         #prepare robot connection
         self.robotIP = "127.0.0.1"
-        #self.robotIP = "192.168.178.81"
+        #self.robotIP = "192.168.188.29"
         self.readFreq = 500
         
 

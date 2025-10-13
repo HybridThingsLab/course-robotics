@@ -1,58 +1,92 @@
 # Physical Interfaces / Human–robot interaction
 winter term 2025/2026
 
-Augsburg Technical University of Applied Sciences, Prof. Andreas Muxel
+Technical University of Applied Sciences Augsburg, Prof. Andreas Muxel
 
-# Universal Robots Simulation (Windows only)
-* Download and install URSim here (account necessary, but it's free): https://www.universal-robots.com/download/software-e-series/simulator-non-linux/offline-simulator-e-series-ur-sim-for-non-linux-5126-lts/
-* Unzip it to the folder of your choice
 
-# Virtual Box (Windows only)
-* Download and install VirtualBox here: https://www.virtualbox.org/wiki/Downloads
-* Start VirtualBox and press 'New'
-* Define name (your choice), Type: Linux, Version: Ubuntu (64-bit) - press ‘Next’
-* Select Memory size of 768 MB and press 'Next'
-* Select ‘Use an existing hard drive file’ and define the path to the folder where the zipped file was unpacked, select the file URSim_VIRTUAL-5.12.6.1102099.vmdk and press ‘Open’. Press ‘Next’. Press ‘Finish’.
-* Go to ‘Settings’ - ‘Network’ - ‘Adapter 1’ and pick Bridged Adapter for ‘Attached to’ and select your Ethernet Connection for ‘Name’. Press ‘Ok’.
-* Go to ‘Settings’ - ‘Display’ - ‘Screen’ and change Video memory to 60 MB and select VBoxVGA for the Graphics Controller. Press ‘Ok’.
-* Press 'Start' to start the virtual machine
-* If an error saying 'Hardware acceleration is not available' is shown then it may be required to reboot the Windows computer into BIOS setup and enable hardware access to * Virtual Machines and then restart Windows, VirtualBox and the virtual machine.
-* Start the Virtual Machine
-* Open "URSim UR5"
-* Confirm Safety Configuration
-* Select main menu top right "Settings"
-* Navigate to "System"
-* Check if "Network" is set to DHCP and if a network is connected (IP address, ...)
-* Navigate to "Remote Control" and press button "Enable"
-* Press EXIT (bottom left) 
-* Press icon touchscreen (top right) and switch from "Local" to "Remote Control"
-* Press "Power off" (bottom left) and switch on Robot witt Button "ON" and in a next step "START"
-* To get the IP address of the robot select "About" in the burger menu (top right)
+# Simulation
+## Docker
+* install Docker Desktop https://docs.docker.com/desktop/
+* select "Docker Hub" on the left side
+* search for "ursim_e-series"
+* press "pull"
 
-# Anaconda
-* Download and install Anaconda here: https://www.anaconda.com/
-* Once Anaconda is installed, open it, create a new environment and call it RTDE_OSC (make sure you are using a python version that is supported by the ur-rtde package here: https://pypi.org/project/ur-rtde/ -> 3.11 should work for Win64)
-* video tutorial Prof. Michael Kipp: https://www.youtube.com/watch?v=sDKVHmPsEEY&t=29s
-* start environment using the play button "Open Terminal"
+The following steps just needs to be done once, when you start simulation for the first time:
+* on the bottom of Docker Desktop open ">_ Terminal"
+* type in terminal
+```
+docker run --name ursim -it --network bridge -p 2222:2222 -p 29999:29999 -p 30001-30004:30001-30004 -p 5900:5900 universalrobots/ursim_e-series ROBOT_MODEL=UR5
+```
+Otherwise, if executed the next time:
+* select "VNC Viewer" on the left side (view install instrucions below)
+* no credentials needed
+* select session and press "Connect"
 
-# Visual Studio Code & OSC Interface
-* download code repository, https://github.com/HybridThingsLab/course-creative-robotics/archive/refs/heads/main.zip
-* Launch VS Code from Anaconda with RTDE_OSC selected in the top of the Home tab
-* Type the following commands in the Terminal of VSCode:
-    * pip install ur_rtde
-    * pip install python-osc
-* Find scripts to read and write data to robot via OSC (Open Sound Control) in subfolder of folder ["/Python"](https://github.com/HybridThingsLab/course-creative-robotics/tree/main/Python) of this repository
-* Add folders to your workspace with "File/Add Folder to Workspace"
-* Save workspace
-* View Folder in "Explorer" (icon documents left)
-* In the "Python/RTDE_OSC_read" folder in VSCode navigate to -> src\config.json and change the “ip” to the IP Address from URSim (burger menue top right "About")
-* In the "Python/RTDE_OSC_write" folder in VSCode navigate to -> src\RobotController.py and change the “ip” to your IP Address from URSim
-* Open two terminal windows in VSCode side-by-side
-* In one terminal window change the directory to RTDE_OSC_read\src by typing "cd " and drag and drop "src" folder to terminal
-* Run the script by typing "python main.py"
+## VNC Viewer Simulation
+* open https://hub.docker.com/extensions/pgmystery/docker-extension-vnc
+* select "Open in Docker Desktop" and install extension
+* create a new session using the "+" on the topleft
+* Give a "Session Name", for example "ursim"
+* Connection-Type is "Docker Container"
+* refresh the next field and look for "/ursim" and select it
+* set VNC port to 5090
+* select option "Stop Container after disconnect"
+* press "Connect"
+* power on virtual robot (very similar to real robot)
+* when finished"Disconnect"
+
+
+# Open Sound Control (OSC) interface / RTDE interface
+## install Boost (Mac only)
+
+* install Apple's Command Line Developer Tools with Terminal: 
+```
+xcode-select --install
+```
+* see next steps here: https://www.macports.org/install.php 
+* run in Terminal:
+```
+sudo port install boost
+```
+
+## install Anaconda (environment managment Python and packages)
+* download and install Anaconda here: https://www.anaconda.com/
+* once Anaconda is installed, open it, create a new environment and call it "robot" (make sure you are using a python version that is supported by the ur-rtde package here: https://pypi.org/project/ur-rtde/ -> Python version 3.12 should work for Windows and Mac
+* video tutorial Prof. Michael Kipp: https://www.youtube.com/watch?v=sDKVHmPsEEY&t=29s (just Anaconda needed, skip Tensorflow, Seaborn & Jupiter Noteook)
+* start environment with play button and select "Open Terminal"
+* type the following commands in the Terminal (might take some time to install, esprecially on Mac):
+```
+pip install ur_rtde
+```
+```
+pip install python-osc
+```
+
+## Visual Studio Code & OSC Python scripts
+* download code repository, https://github.com/HybridThingsLab/course-robotics/archive/refs/heads/2025.zip and unzip
+* launch VS Code from Anaconda at "Home" with "robot" selected in the top of the Home tab
+* add folder "creative-robotics" to your workspace with "File/Add Folder to Workspace"
+* save workspace
+* find scripts to read and write data to robot via OSC (Open Sound Control) in subfolder of folder "/Python"
+* view Folder in "Explorer" (icon documents left)
+* in the "Python/RTDE_OSC_read" folder in VSCode navigate to -> src\config.json and change the “ip” to the IP Address of the robot (simulation or real robot) (burger menue top right "About")
+* in the "Python/RTDE_OSC_write" folder in VSCode navigate to -> src\RobotController.py and change the “ip” to your IP Address of the robot (simulation or real robot)
+* open two terminal windows in VSCode side-by-side
+* in one terminal window change the directory to RTDE_OSC_read\src by typing "cd " and drag and drop "src" folder to terminal
+* Run the script by typing
+```
+python main.py
+```
 * In the other terminal window change the directory to RTDE_OSC_write\src by typing "cd " and drag and drop "src" folder to terminal
-* Run the script by typing "python main.py --driverobot"
+* if you run the real robot type in the terminal
+```
+python main.py --driverobot
+```
+* if you run robot as a simulation with Docker type in the terminal
+```
+python main.py --driverobot --docker
+```
 * you should get an message "INFO:root:connected!"
 * open one example provided in the repository (p.ex. "TouchDesigner/02_RobotController/robotController.toe")
-* To stop a python script press "ctrl+c" in the terminal
+* To stop a Python script press "ctrl+c" in the terminal
 * To restart use UP or DOWN key to recall last prompts and press RETURN
