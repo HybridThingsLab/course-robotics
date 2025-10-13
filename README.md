@@ -7,6 +7,7 @@ Technical University of Applied Sciences Augsburg, Prof. Andreas Muxel
 # Simulation
 ## Docker
 * install Docker Desktop https://docs.docker.com/desktop/
+* start Docker Desktop
 * select "Docker Hub" on the left side
 * search for "ursim_e-series"
 * press "pull"
@@ -67,17 +68,17 @@ pip install python-osc
 * launch VS Code from Anaconda at "Home" with "robot" selected in the top of the Home tab
 * add folder "creative-robotics" to your workspace with "File/Add Folder to Workspace"
 * save workspace
-* find scripts to read and write data to robot via OSC (Open Sound Control) in subfolder of folder "/Python"
+* find scripts to read and write data to robot viaOpen Sound Control (OSC) in subfolder of folder "/Python"
 * view Folder in "Explorer" (icon documents left)
 * in the "Python/RTDE_OSC_read" folder in VSCode navigate to -> src\config.json and change the “ip” to the IP Address of the robot (simulation or real robot) (burger menue top right "About")
 * in the "Python/RTDE_OSC_write" folder in VSCode navigate to -> src\RobotController.py and change the “ip” to your IP Address of the robot (simulation or real robot)
-* open two terminal windows in VSCode side-by-side
+* open two terminal windows in VSCode side-by-side by using the split option in the terminal (icon window left from trash can)
 * in one terminal window change the directory to RTDE_OSC_read\src by typing "cd " and drag and drop "src" folder to terminal
-* Run the script by typing
+* run the script by typing
 ```
 python main.py
 ```
-* In the other terminal window change the directory to RTDE_OSC_write\src by typing "cd " and drag and drop "src" folder to terminal
+* in the other terminal window change the directory to RTDE_OSC_write\src by typing "cd " and drag and drop "src" folder to terminal
 * if you run the real robot type in the terminal
 ```
 python main.py --driverobot
@@ -88,5 +89,14 @@ python main.py --driverobot --docker
 ```
 * you should get an message "INFO:root:connected!"
 * open one example provided in the repository (p.ex. "TouchDesigner/02_RobotController/robotController.toe")
-* To stop a Python script press "ctrl+c" in the terminal
-* To restart use UP or DOWN key to recall last prompts and press RETURN
+* to stop a Python script press "ctrl+c" in the terminal
+* to restart use UP or DOWN key to recall last prompts and press RETURN
+
+# TouchDesigner, Processing, P5.js
+* any tool with an OSC interface can be used to control the robot
+* see also code examples provided in this repository
+* downloads:
+    * TouchDesigner, https://derivative.ca/product/touchdesigner-non-commercial/77
+    * Processing, https://processing.org/download
+    * p5js, https://p5js.org/download/
+    * ...
