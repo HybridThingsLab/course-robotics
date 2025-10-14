@@ -8,9 +8,6 @@ Technical University of Applied Sciences Augsburg, Prof. Andreas Muxel
 ## Docker
 * install Docker Desktop https://docs.docker.com/desktop/
 * start Docker Desktop
-* select "Docker Hub" on the left side
-* search for "ursim_e-series"
-* press "pull"
 
 The following steps just needs to be done once, when you start simulation for the first time:
 * on the bottom of Docker Desktop open ">_ Terminal"
