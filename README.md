@@ -27,7 +27,7 @@ Otherwise, if executed the next time:
 * Give a "Session Name", for example "ursim"
 * Connection-Type is "Docker Container"
 * refresh the next field and look for "/ursim" and select it
-* set VNC port to 5090
+* set VNC port to 5900
 * select option "Stop Container after disconnect"
 * press "Connect"
 * power on virtual robot (very similar to real robot)
