@@ -63,7 +63,7 @@ pip install python-osc
 ## Visual Studio Code & OSC Python scripts
 * download code repository, https://github.com/HybridThingsLab/course-robotics/archive/refs/heads/2025.zip and unzip
 * launch VS Code from Anaconda at "Home" with "robot" selected in the top of the Home tab
-* add folder "creative-robotics" to your workspace with "File/Add Folder to Workspace"
+* add folder "course-robotics-2025" to your workspace with "File/Add Folder to Workspace"
 * save workspace
 * find scripts to read and write data to robot viaOpen Sound Control (OSC) in subfolder of folder "/Python"
 * view Folder in "Explorer" (icon documents left)
