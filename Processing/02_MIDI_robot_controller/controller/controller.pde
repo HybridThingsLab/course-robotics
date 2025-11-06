@@ -57,7 +57,7 @@ void setup() {
   myMidiBus = new MidiBus(this, 2, 1); // Adjust MIDI input/output indices as needed
   
   // Initialize OSC
-  oscP5 = new OscP5(this, 10000); // Listening on port 12000
+  oscP5 = new OscP5(this, 10000); // Listening on port 10000
   
   // Register OSC event handlers
   oscP5.plug(this, "iknosolution", "/iknosolution");

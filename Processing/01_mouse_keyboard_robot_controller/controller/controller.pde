@@ -56,9 +56,9 @@ void setup() {
   oscP5.plug(this, "stopped", "/stopped");
 
   // Optional font
-  // customFont = createFont("data/IBM_Plex_Mono/IBMPlexMono-Regular.ttf", 14);
-  // textFont(customFont);
-  textSize(14);
+  /*customFont = createFont("IBMPlexMono-14.vlw", 14);
+  textFont(customFont);
+  textSize(14);*/
 }
 
 void draw() {
